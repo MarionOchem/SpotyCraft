@@ -1,0 +1,112 @@
+/*
+This is the algorithme to calculate the current mood of the user based on the current top 10 tracks. 
+
+FEATURE : 
+
+--> return one object / synthese of the song
+
+    Tempo 
+    Largo (very slow, 40–60 BPM)    40 - 65  très lent
+    Larghetto (less slow, 60–66 BPM)
+    Adagio (moderately slow, 66–76 BPM) 66 - 108  lent
+    Andante (walking speed, 76–108 BPM)
+    Moderato (moderate, 108–120 BPM) 109 - 130  rapide
+    Allegro (fast, 120–168 BPM)
+    Presto (faster, 168–200 BPM)    130 - 200   très rapide
+    Prestissimo (even faster, 200 - 400) 
+    Format data : into non floating int. 
+
+    Energy 
+    Fast, loud, noisy, intense, general entropy.
+    From 0 to 1
+    Very Low ( [0 ; 0.20] )
+    Low ( [0.21 ; 0.41] )
+    Medium ( [0.42 ; 0.62] )
+    High ( [0.63 ; 0.83] )
+    Very High ( [0.84 ; 1] )
+    Format data : from floating 3 to floating 2
+
+    Mode
+    Major (1)
+    Minor (2)
+    No data formatting 
+
+    Danceability 
+    Least - Most
+    From 0 to 1
+    Very Low ( [0 ; 0.20] )
+    Low ( [0.21 ; 0.41] )
+    Medium ( [0.42 ; 0.62] )
+    High ( [0.63 ; 0.83] )
+    Very High ( [0.84 ; 1] )
+    Format data : from floating 3 to floating 2
+
+    Valence
+    High Positivity - Low Positivity (Negativity)
+    From 0 to 1
+    Very Low ( [0 ; 0.20] )
+    Low ( [0.21 ; 0.41] )
+    Medium ( [0.42 ; 0.62] )
+    High ( [0.63 ; 0.83] )
+    Very High ( [0.84 ; 1] )
+    Format data : from floating 3 to floating 2
+
+    Key
+    Emotions tracker 
+    From 0 to 10 with -1 no data 
+
+
+
+
+// Data set not exploited for emotions tracker could serve to make "badge"-like info 
+That is : those data won't be exploit unless reaching a high level presence in the listening of the user. 
+Eg : "i don't like humans" === instrumentalness max 
+     "seeking humans presence " === speechness max 
+     " i'm special " === overall popularity score very low 
+
++ Adding some badge if emotions tracker data reach high value too 
+Eg : "Go see a shrink. " === ALL songs are Minor
+     " Are you in love ? " === ALL songs are Major 
+     " Obsessed " === If a genre takes more than 70% of the listening range. 
+    - accousticness
+    - instrumentalness
+    - loudness 
+    - speechiness == ambiant / instrumental (no lyricks) | < 0.33 = no | < 0.33 < 0.66 both | > 0.66 spoken words
+
+
+
+
+
+
+    - key >> matching mood with musical keys 
+0 > C: Innocence, happiness with a spiritual feeling.
+Cm: Innocence, sadness, heartbroken and evokes yearning.
+C#m: Passionate and deep, evoking sorrow, grief, despair, and self-punishment.
+1 > Db: Depressive masked by an air of happiness. Evokes feelings of grief and despair.
+2 > D: Triumphant and victorious. Feels like war marches or holiday songs.
+Dm: serious and melancholic. Brings on feelings of concerns and contemplation.
+D#m: Deep and anxious, evoking feelings of distress, terror, darkness, and hesitation.
+3 > Eb: This key brings on feelings of cruelty, but also devoted love, openness, and intimacy.
+4 > E: Dissatisfaction and a ready-to-fight feeling – but also joy and delight.
+Em: Restless love, grief, and mournfulness.
+5 > F: Optimism and the will to explode.
+Fm: Dark and funereal, evoking feelings of the deepest depression, death, loss, and misery.
+6 > F#: Conquest, relief, triumph, victory, and clarity.
+F#m: Resentment, discontentment, and lamentation, but with a touch of hope.
+7 > G: Happy, but with serious overtones, idyllic, and poetic. This evokes calm, satisfaction, tenderness, gratitude and peace.
+Gm: Feelings of discontent, uneasiness, failure, concern, and struggling.
+8 > Ab: Death, eternity, judgment, darkness.
+Abm: related to wailing, suffocation, lamentation, struggle, and negativity.
+9 > A: Brings feelings of joy, reciprocated love, satisfaction, optimistic, trust, and spirituality.
+Am: Sad, but with tenderness.
+10 > Bb: Joyful and cheerful, with feelings of love, consciousness, hope, optimism, and peace.
+Bbm: Feels like the night, darkness, blasphemy, death, and destiny.
+11 > B: Feelings of strength, wildness, passion, jealousy, fury, negativity, and the will to fight.
+Bm: Solitude, melancholy, patience, calm, submission, and acceptance.
+
+
+ANALYSE : 
+ --> return an array of objects (~ 1000 objects) / set of micro measurement overall the song
+ analyse.segments.pitches
+ analyse.segments.timbre
+*/
